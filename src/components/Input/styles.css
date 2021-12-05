@@ -1,0 +1,37 @@
+.input {
+  height: 36px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 8px;
+  border: solid 1px var(--grey);
+  padding: 4px 8px;
+  color: var(--light-font-color);
+}
+
+.input .left-icon, .input .left-text {
+  margin-right: 8px;
+  line-height: 100%;
+}
+
+.input .left-text {
+  font-weight: bold;
+  font-size: 1.3em;
+}
+
+.input input {
+  width: 100%;
+  flex: 1;
+  align-self: stretch;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  outline: 0;
+  font-size: 1.2em;
+  color: var(--font-color);
+}
+
+.input input::placeholder {
+  color: var(--light-font-color);
+  font-style: italic;
+}
