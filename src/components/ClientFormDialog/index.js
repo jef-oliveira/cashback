@@ -19,7 +19,7 @@ function ClientFormDialog({ client, onCancel, ...props }) {
 
   const message = useMemo(() => {
     if (client.id)
-      return `${client.name} está acumulando cashback com o Escudo Geek desde ${client.creationDate.toLocaleDateString()}!`;
+      return `${client.name} está acumulando cashback com o Escudo Geek desde ${client.createdAt.toLocaleDateString()}!`;
     else
       return 'Adicione um novo cliente para começar a acumular cashback com o Escudo Geek!';
   }, [client]);

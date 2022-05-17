@@ -1,10 +1,13 @@
 class Client {
   constructor(props) {
-    this.creationDate = props.creationDate || new Date();
-    this.id = props.id || `${this.creationDate.getTime()}`;
-    this.name = props.name;
-    this.phone = props.phone;
-    this.transactions = props.transactions || [];
+    this.createdAt = props.createdAt ? toDate(props.createdAt) : new Date();
+    this.id = props.id;
+    this.name = props.name || '';
+    this.phone = props.phone || '';
+    this.transactions = (props.transactions || []).map(transaction => ({
+      ...transaction,
+      date: toDate(transaction.date)
+    }));
 
     this.cashbackBalance = this.cashbackBalanceFromTransactions;
   }
@@ -20,6 +23,15 @@ class Client {
   addTransaction(transaction) {
     this.transactions.push({ ...transaction });
     this.cashbackBalance += transaction.value;
+  }
+
+  get props() {
+    return {
+      createdAt: this.createdAt,
+      name: this.name,
+      phone: this.phone,
+      transactions: this.transactions
+    }
   }
 }
 
@@ -47,5 +59,9 @@ Client.sort = function(clientsList, sorting) {
       return firstPropValue - secondPropValue;
   });
 };
+
+function toDate(date) {
+  return date.toDate ? date.toDate() : date;
+}
 
 export default Client;

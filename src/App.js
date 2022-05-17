@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 
-import DataContext from './context';
+import { useDataInitialized } from './context';
+import Loader from './components/Loader';
 import Header from './components/Header';
 import ActionBar from './components/ActionBar';
 import ClientsList from './components/ClientsList';
@@ -11,6 +12,7 @@ import TransactionFormDialog from './components/TransactionFormDialog';
 import './App.css';
 
 function App() {
+  const dataInitialized = useDataInitialized();
   const [search, setSearch] = useState('');
   const [selectedClient, setSelectedClient] = useState();
   const [showClientForm, setShowClientForm] = useState(false);
@@ -44,20 +46,20 @@ function App() {
   }, []);
 
   return (
-    <DataContext>
-      <div className="app">
-        <Header />
-        <ActionBar onSearch={handleSearch} onAddClient={handleAddClient} />
-        <ClientsList search={search} onClick={handleClientListClick} />
+    <div className="app">
+      <Header />
+      <ActionBar onSearch={handleSearch} onAddClient={handleAddClient} />
+      <ClientsList search={search} onClick={handleClientListClick} />
 
-        {showClientForm && (
-          <ClientFormDialog client={selectedClient} onCancel={closeClientForm} />
-        )}
-        {showTransactionForm && (
-          <TransactionFormDialog client={selectedClient} onCancel={closeTransactionForm} />
-        )}
-      </div>
-    </DataContext>
+      {showClientForm && (
+        <ClientFormDialog client={selectedClient} onCancel={closeClientForm} />
+      )}
+      {showTransactionForm && (
+        <TransactionFormDialog client={selectedClient} onCancel={closeTransactionForm} />
+      )}
+
+      {!dataInitialized && <Loader />}
+    </div>
   );
 }
 

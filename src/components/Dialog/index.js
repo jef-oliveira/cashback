@@ -1,4 +1,6 @@
 import { useCallback } from 'react';
+
+import Overlay from '../Overlay';
 import Button from '../Button';
 
 import './styles.css';
@@ -11,7 +13,7 @@ function Header({ title, cancelLabel = 'Cancelar', onCancel, confirmLabel = 'Con
   }, [onConfirm]);
 
   return (
-    <div className={`dialog${className ? ` ${className}` : ''}`} { ...props }>
+    <Overlay className={`dialog${className ? ` ${className}` : ''}`} { ...props }>
       <form onSubmit={handleSubmit}>
         <section className="content-container">
           {title?.length > 0 && (
@@ -30,7 +32,7 @@ function Header({ title, cancelLabel = 'Cancelar', onCancel, confirmLabel = 'Con
           </footer>
         </section>
       </form>
-    </div>
+    </Overlay>
   );
 }
 
