@@ -18,3 +18,8 @@
 .app a {
   color: var(--text-color);
 }
+
+.app .version {
+  color: var(--light-font-color);
+  font-size: 0.8em;
+}

@@ -11,6 +11,7 @@ import TransactionFormDialog from './components/TransactionFormDialog';
 
 import './App.css';
 
+
 function App() {
   const dataInitialized = useDataInitialized();
   const [search, setSearch] = useState('');
@@ -59,6 +60,7 @@ function App() {
       )}
 
       {!dataInitialized && <Loader />}
+      <span className="version">Ver. {process.env.REACT_APP_VERSION}</span>
     </div>
   );
 }
