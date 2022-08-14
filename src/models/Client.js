@@ -52,7 +52,7 @@ Client.sort = function(clientsList, sorting) {
     const secondPropValue = sorting.direction === 'asc' ? c2[sorting.by] : c1[sorting.by];
 
     if (sorting.by === 'lastTransaction')
-      return firstPropValue.date - secondPropValue.date;
+      return (firstPropValue?.date || 0) - (secondPropValue?.date || 0);
     if (sorting.by === 'name' || sorting.by === 'phone')
       return firstPropValue.localeCompare(secondPropValue);
     else
