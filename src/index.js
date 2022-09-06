@@ -5,7 +5,6 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 
-import DataProvider from './context';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
@@ -14,9 +13,7 @@ library.add(fas, fab);
 
 ReactDOM.render(
   <React.StrictMode>
-    <DataProvider>
-      <App />
-    </DataProvider>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

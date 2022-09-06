@@ -1,0 +1,8 @@
+@use 'styles/colors';
+
+.page-header {
+  background-color: colors.$primary;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
