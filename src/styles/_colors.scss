@@ -1,4 +1,6 @@
 $primary: #FAB31C;
+$primary-light: lighten($primary, 5%);
+$primary-dark: darken($primary, 5%);
 
 $background: #FFFFFF;
 
@@ -6,6 +8,7 @@ $text: #585858;
 $text-light: lighten($text, 25%);
 $text-dark: darken($text, 25%);
 
+//LEGACY
 $light-grey: #FAFAFA;
 $regular-grey: #F7F7F7;
 $grey: #E7E7E7;

@@ -4,11 +4,11 @@
 .center-content {
   box-sizing: border-box;
 
-  @media (min-width: (breakpoints.$small+(spacing.$large*2)+1px)) {
-    width: 1024px;
+  @media (min-width: (breakpoints.$large+(spacing.$large*2)+1px)) {
+    width: breakpoints.$large;
   }
 
-  @media (max-width: (breakpoints.$small+(spacing.$large*2))) {
+  @media (max-width: (breakpoints.$large+(spacing.$large*2))) {
     align-self: stretch;
     margin: spacing.$large;
   }

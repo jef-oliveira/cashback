@@ -6,6 +6,8 @@
         alias: {
           components: './src/components',
           context: './src/context',
+          models: './src/models',
+          pages: './src/pages',
           styles: './src/styles'
         }
       }

@@ -6,7 +6,7 @@ function Icon({ name, type = 'fas', ...props }) {
   );
 }
 
-Icon.REGULAR = 'fas';
+Icon.SOLID = 'fas';
 Icon.BRAND = 'fab';
 
 export default Icon;

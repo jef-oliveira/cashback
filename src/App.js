@@ -1,16 +1,21 @@
-import DataProvider from './context';
-import { PageHeader, PageContent, PageFooter } from 'components';
+import { initializeApp } from 'firebase/app';
+
+import { AuthProvider, DataProvider } from 'context';
+import Router from 'pages';
+
+import { firebaseConfig } from 'context/config';
 
 import './App.scss';
 
-function App() {
+initializeApp(firebaseConfig);
 
+function App() {
   return (
-    <DataProvider>
-      <PageHeader />
-      <PageContent />
-      <PageFooter />
-    </DataProvider>
+    <AuthProvider>
+      <DataProvider>
+        <Router />
+      </DataProvider>
+    </AuthProvider>
   );
 }
 

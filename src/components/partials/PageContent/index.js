@@ -2,14 +2,10 @@ import { CenterContent } from 'components';
 
 import './styles.scss';
 
-function PageContent({ className, ...props }) {
+function PageContent({ containerClassName, ...props }) {
   return (
-    <main className={`page-content${className ? ` ${className}` : ''}`} { ...props }>
-      <CenterContent>
-        {[...Array(10)].map((_, index) => (
-          <p key={index}>page content</p>
-        ))}
-      </CenterContent>
+    <main className={`page-content${containerClassName ? ` ${containerClassName}` : ''}`}>
+      <CenterContent { ...props } />
     </main>
   );
 }
