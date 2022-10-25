@@ -14,6 +14,11 @@
     justify-content: flex-end;
     box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.25);
 
+    a {
+      color: colors.$text !important;
+      text-decoration: none;
+    }
+
     ul {
       list-style-type: none;
       margin: 0;
@@ -29,11 +34,6 @@
 
         &:hover {
           background-color: colors.$primary-dark;
-        }
-
-        a {
-          color: colors.$text !important;
-          text-decoration: none;
         }
 
         span {

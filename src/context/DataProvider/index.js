@@ -1,5 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
-import { getFirestore, onSnapshot, collection, query, doc, addDoc, updateDoc } from 'firebase/firestore';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 
 import { Client } from 'models';
 
@@ -10,17 +9,12 @@ export function DataProvider({ children }) {
   const [initialized, setInitialized] = useState(false);
   const [clients, setClients] = useState([]);
 
-  const Firestore = useMemo(() => getFirestore(), []);
-
   useEffect(function() {
-    const unsubscribe = onSnapshot(query(collection(Firestore, 'clients')), (snapshot) => {
+    const unsubscribe = Client.onSnapshot((snapshot) => {
       const updates = []
       snapshot.docChanges().forEach((change) => {
         if (['added', 'modified', 'removed'].includes(change.type))
-          updates.push({
-            type: change.type,
-            client: new Client({ id: change.doc.id, ...change.doc.data() })
-          });
+          updates.push({ type: change.type, client: new Client(change.doc) });
       });
       updateClients.current(updates);
       setInitialized(true);
@@ -44,31 +38,8 @@ export function DataProvider({ children }) {
     };
   }, [clients]);
 
-  const addClient = useCallback(function(clientData) {
-    const newClient = new Client(clientData);
-    if (clientData.initialCashback)
-      newClient.addTransaction({ date: newClient.createdAt, value: clientData.initialCashback });
-
-    addDoc(collection(Firestore, 'clients'), newClient.props).then(docRef => {
-      newClient.id = docRef.id;
-      updateClients.current([{ type: 'added', client: newClient }]);
-    });
-  }, []);
-
-  const editClient = useCallback(function(id, clientData) {
-    const clientDoc = doc(Firestore, 'clients', id);
-    const editedClient = new Client({ ...clients.find(client => client.id === id), ...clientData });
-    updateDoc(clientDoc, editedClient.props);
-    updateClients.current([{ type: 'modified', client: editedClient }]);
-  }, [clients]);
-
-  const addTransaction = useCallback(function(client, transactionData) {
-    client.addTransaction(transactionData);
-    editClient(client.id, client.props);
-  }, [editClient]);
-
   return (
-    <DataContext.Provider value={{ initialized, clients, addClient, editClient, addTransaction }}>
+    <DataContext.Provider value={{ initialized, clients }}>
       {children}
     </DataContext.Provider>
   );
@@ -87,13 +58,8 @@ export function useClients(search, sorting) {
   }, [search, clients]);
 
   const sortedClients = useMemo(function() {
-    return Client.sort(searchedClients, sorting);
+    return Client.sort(searchedClients, sorting || { direction: 'asc', by: 'name' });
   }, [searchedClients, sorting]);
 
   return sortedClients;
-}
-
-export function useClientOperations() {
-  const { addClient, editClient, addTransaction } = React.useContext(DataContext);
-  return { addClient, editClient, addTransaction };
 }

@@ -21,19 +21,22 @@ function NavBar({ className, ...props }) {
       <nav>
         <ul>
           <NavItem icon="home" title="Início" to="/" />
-          <NavItem icon="search" title="Busca" />
           {Boolean(currentUser) && (
             <>
-              {/*<NavItem icon="shopping-cart" title="Carrinho" />*/}
+              {Boolean(currentUser?.admin) && (
+                <>
+                  <NavItem icon="coins" title="Clientes e cashback" to="/cashback" />
+                  <NavItem icon="box" title="Estoque" to="/storage" />
+                </>
+              )}
               <NavItem icon="heart" title="Lista de desejos" to="/wishlist" />
+              <NavItem icon="shopping-cart" title="Carrinho" to="/cart" />
               <NavItem icon="user-circle" title="Minha conta" to="/account" />
               <NavItem icon="right-from-bracket" onClick={handleSignOut} title="Sair" />
             </>
           )}
           {!Boolean(currentUser) && (
-            <>
-              <NavItem icon="right-to-bracket" onClick={signIn} title="Entrar" />
-            </>
+            <NavItem icon="right-to-bracket" onClick={signIn} title="Entrar" />
           )}
         </ul>
       </nav>
@@ -41,13 +44,13 @@ function NavBar({ className, ...props }) {
   );
 }
 
-function NavItem({ icon, title, to, onClick }) {
+function NavItem({ icon, title, ...otherProps }) {
   return(
-    <li title={title}>
-      <Link to={to} onClick={onClick}>
-        <Icon name={icon} /><span> {title}</span>
-      </Link>
-    </li>
+    <Link { ...otherProps }>
+      <li>
+          <Icon name={icon} /><span> {title}</span>
+      </li>
+    </Link>
   );
 }
 

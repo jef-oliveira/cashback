@@ -1,16 +1,7 @@
-class Client {
-  constructor(props) {
-    this.createdAt = props.createdAt ? toDate(props.createdAt) : new Date();
-    this.id = props.id;
-    this.name = props.name || '';
-    this.phone = props.phone || '';
-    this.transactions = (props.transactions || []).map(transaction => ({
-      ...transaction,
-      date: toDate(transaction.date)
-    }));
+import Firebase from 'fb';
 
-    this.cashbackBalance = this.cashbackBalanceFromTransactions;
-  }
+class Client extends Firebase.Model {
+  static collectionPath() { return 'clients'; }
 
   get lastTransaction() {
     return this.transactions.sort((t1, t2) => t2.date - t1.date)[0];
@@ -62,9 +53,5 @@ Client.sort = function(clientsList, sorting) {
 
   return clientsList;
 };
-
-function toDate(date) {
-  return date.toDate ? date.toDate() : date;
-}
 
 export default Client;

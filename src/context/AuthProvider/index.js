@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { getAuth, signOut as signOutFromFirebase, signInWithPopup, onAuthStateChanged, GoogleAuthProvider } from 'firebase/auth';
 
+import { User } from 'models';
+
 const AuthContext = React.createContext({});
 
 export function AuthProvider({ children }) {
@@ -8,7 +10,21 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const auth = getAuth();
-    onAuthStateChanged(auth, setCurrentUser);
+    onAuthStateChanged(auth, async function(authUser) {
+      let user;
+      if (authUser) {
+        user = await User.find(authUser.uid);
+        if (!user) {
+          user = await new User({
+            id: authUser.uid,
+            name: authUser.displayName,
+            email: authUser.email,
+            photo: authUser.photoURL
+          }).save()
+        }
+      }
+      setCurrentUser(user);
+    });
   }, [])
 
   const signIn = useCallback(function() {
@@ -30,8 +46,6 @@ export function AuthProvider({ children }) {
       console.log('[AUTH CONTEXT] signed out successfully');
     }).catch((error) => {
       console.error('[AUTH CONTEXT] sign out encountered a problem:', error);
-    }).finally(() => {
-      setCurrentUser();
     });
   }, []);
 

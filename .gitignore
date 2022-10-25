@@ -133,4 +133,4 @@ yarn-error.log*
 firebase.json
 firestore.indexes.json
 firestore.rules
-src/context/config.js
+src/firebase/.config.js

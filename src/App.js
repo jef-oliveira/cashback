@@ -1,13 +1,10 @@
-import { initializeApp } from 'firebase/app';
-
+import Firebase from 'fb';
 import { AuthProvider, DataProvider } from 'context';
 import Router from 'pages';
 
-import { firebaseConfig } from 'context/config';
-
 import './App.scss';
 
-initializeApp(firebaseConfig);
+Firebase.initialize();
 
 function App() {
   return (
