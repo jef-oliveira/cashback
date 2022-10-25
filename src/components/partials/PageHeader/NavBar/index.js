@@ -8,19 +8,14 @@ import Header from '../Header';
 import './styles.scss';
 
 function NavBar({ className, ...props }) {
-  const navigate = useNavigate();
   const { currentUser, signIn, signOut } = useSession();
-
-  const handleSignOut = useCallback(async function() {
-    await signOut();
-    navigate('/');
-  }, [signOut, navigate])
 
   return (
     <Header className={`navbar${className ? ` ${className}` : ''}`} { ...props }>
       <nav>
         <ul>
           <NavItem icon="home" title="Início" to="/" />
+          <NavItem icon="shopping-cart" title="Carrinho" to="/cart" />
           {Boolean(currentUser) && (
             <>
               {Boolean(currentUser?.admin) && (
@@ -30,9 +25,8 @@ function NavBar({ className, ...props }) {
                 </>
               )}
               <NavItem icon="heart" title="Lista de desejos" to="/wishlist" />
-              <NavItem icon="shopping-cart" title="Carrinho" to="/cart" />
               <NavItem icon="user-circle" title="Minha conta" to="/account" />
-              <NavItem icon="right-from-bracket" onClick={handleSignOut} title="Sair" />
+              <NavItem icon="right-from-bracket" onClick={signOut} title="Sair" />
             </>
           )}
           {!Boolean(currentUser) && (
