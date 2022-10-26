@@ -1,42 +1,40 @@
-import React, { useState, useRef, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 
-import { Client } from 'models';
+import { Client, User } from 'models';
+
+const CLIENT_MODELS = [Client, User];
 
 const DataContext = React.createContext({});
 
 export function DataProvider({ children }) {
-  const updateClients = useRef();
   const [initialized, setInitialized] = useState(false);
   const [clients, setClients] = useState([]);
 
-  useEffect(function() {
-    const unsubscribe = Client.onSnapshot((snapshot) => {
-      const updates = []
-      snapshot.docChanges().forEach((change) => {
-        if (['added', 'modified', 'removed'].includes(change.type))
-          updates.push({ type: change.type, client: new Client(change.doc) });
-      });
-      updateClients.current(updates);
-      setInitialized(true);
-    });
+  const updateClients = useCallback(function(updates) {
+    const { updatedClients, updatedIds } = updates.reduce((result, update) => {
+      result.updatedIds.push(update.client.id);
+      if (update.type !== 'removed')
+        result.updatedClients.push(update.client);
 
-    return unsubscribe;
+      return result;
+    }, { updatedClients: [], updatedIds: [] });
+
+    setClients((clients) => [ ...clients.filter(client => !updatedIds.includes(client.id)), ...updatedClients ]);
   }, []);
 
   useEffect(function() {
-    updateClients.current = function(updates) {
-      const { updatedClients, updatedIds } = updates.reduce((result, update) => {
-        result.updatedIds.push(update.client.id);
-        if (update.type !== 'removed')
-          result.updatedClients.push(update.client);
+    const unsubscribers = CLIENT_MODELS.map(Model => Model.onSnapshot((snapshot) => {
+      const updates = []
+      snapshot.docChanges().forEach((change) => {
+        if (['added', 'modified', 'removed'].includes(change.type))
+          updates.push({ type: change.type, client: new Model(change.doc) });
+      });
+      updateClients(updates);
+      setInitialized(true);
+    }))
 
-        return result;
-      }, { updatedClients: [], updatedIds: [] });
-
-      const newList = [ ...clients.filter(client => !updatedIds.includes(client.id)), ...updatedClients ];
-      setClients(newList);
-    };
-  }, [clients]);
+    return () => unsubscribers.forEach(unsubscribe => unsubscribe());
+  }, [updateClients]);
 
   return (
     <DataContext.Provider value={{ initialized, clients }}>

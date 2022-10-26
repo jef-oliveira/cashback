@@ -1,0 +1,80 @@
+@use 'styles/breakpoints';
+@use 'styles/colors';
+@use 'styles/spacing';
+
+.clients-list {
+  min-width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  background-color: white;
+
+  th, td {
+    width: 25%;
+    padding: spacing.$regular spacing.$medium;
+    border-bottom: solid 1px colors.$text-lightest;
+    text-align: left;
+
+    .icon {
+      font-size: 0.9em;
+      color: colors.$text-light;
+      margin-left: spacing.$small;
+    }
+
+    &.action-column {
+      width: unset;
+    }
+  }
+
+  th {
+    border-bottom-width: 2px;
+
+    .column-icon {
+      font-size: 0.9em;
+      margin-right: spacing.$small;
+    }
+
+    h3 {
+      margin: 0;
+      cursor: pointer;
+    }
+  }
+
+  tbody {
+    tr {
+      cursor: pointer;
+
+      &:nth-child(even) {
+        background-color: colors.$background-dark;
+      }
+
+      &:hover {
+        background-color: darken(colors.$background-dark, 2%);
+      }
+
+      &.empty {
+        cursor: initial;
+
+        &:hover {
+          background-color: inherit;
+        }
+
+        td {
+          border-bottom-width: 0;
+          padding: spacing.$large;
+          text-align: center;
+
+          .icon {
+            font-size: 4em;
+            color: colors.$text-light;
+          }
+
+          h2 {
+            font-size: 1.5em;
+            margin: 8px;
+          }
+        }
+      }
+    }
+  }
+
+}
