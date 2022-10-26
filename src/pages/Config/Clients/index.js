@@ -1,10 +1,18 @@
-import { ClientsList } from 'components';
+import { TextInput, Button, ClientsList } from 'components';
 
-function Cashback() {
+import './styles.scss';
+
+function Clients() {
 
   return (
-    <ClientsList />
+    <div className="clients-page">
+      <div className="search-bar">
+        <TextInput icon="magnifying-glass" placeholder="Buscar por nome..." />
+        <Button theme={Button.PRIMARY} style={{ marginLeft: '8px' }}>Procurar</Button>
+      </div>
+      <ClientsList onClick={client => console.log('CLIENT', client)} />
+    </div>
   );
 }
 
-export default Cashback;
+export default Clients;

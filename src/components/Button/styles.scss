@@ -3,27 +3,75 @@
 
 .button {
   height: spacing.$huge;
-  border: none;
+  min-width: spacing.$huge;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid;
   border-radius: 8px;
   font-weight: bold;
   font-size: inherit;
-  padding: spacing.$regular spacing.$medium;
+  padding: 0 spacing.$medium;
   box-sizing: border-box;
   cursor: pointer;
 
-  &.regular {
-    border: 2px solid colors.$primary;
-    color: colors.$primary;
-    background-color: white;
+  .icon {
+    font-size: 0.85em;
   }
 
-  &.primary {
-    color: white;
-    background-color: colors.$primary;
+  .icon + span, span + .icon {
+    margin-left: spacing.$small;
   }
 
-  &.danger {
-    color: white;
-    background-color: colors.$danger;
+  $themes: (
+    neutral: colors.$neutral-colors,
+    success: colors.$success-colors,
+    danger: colors.$danger-colors,
+    primary: colors.$primary-colors,
+  );
+
+  @each $theme, $color-map in $themes {
+    $iddle-color: map-get($color-map, regular);
+    $hover-color: map-get($color-map, dark);
+    $hover-outline-color: transparentize($hover-color, 0.94);
+    $active-color: map-get($color-map, darkest);
+    $active-outline-color: transparentize($active-color, 0.94);
+
+    &.#{$theme} {
+      border-color: $iddle-color;
+
+      &.outline {
+        color: $iddle-color;
+        background-color: colors.$none;
+
+        &:hover {
+          color: $hover-color;
+          border-color: $hover-color;
+          background-color: $hover-outline-color;
+        }
+
+        &:active {
+          color: $active-color;
+          border-color: $active-color;
+          background-color: $active-outline-color;
+        }
+      }
+
+      &.solid {
+        color: colors.$neutral-white;
+        background-color: $iddle-color;
+
+        &:hover {
+          border-color: $hover-color;
+          background-color: $hover-color;
+        }
+
+        &:active {
+          border-color: $active-color;
+          background-color: $active-color;
+        }
+      }
+    }
   }
 }

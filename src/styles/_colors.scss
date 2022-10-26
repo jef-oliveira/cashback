@@ -1,3 +1,5 @@
+$none: transparent;
+
 $neutral: #808080;
 $neutral-white: #FFFFFF;
 $neutral-black: #000000;
@@ -24,7 +26,7 @@ $neutral-lightest: map-get($neutral-colors, lightest);
 $neutral-dark: map-get($neutral-colors, dark);
 $neutral-darkest: map-get($neutral-colors, darkest);
 
-$primary-colors: buildColorMap($primary, 6);
+$primary-colors: buildColorMap($primary, 4);
 $primary-light: map-get($primary-colors, light);
 $primary-lightest: map-get($primary-colors, lightest);
 $primary-dark: map-get($primary-colors, dark);
