@@ -1,0 +1,62 @@
+@use 'styles/breakpoints';
+@use 'styles/colors';
+@use 'styles/spacing';
+
+.navigation-list {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: colors.$primary;
+  border-bottom: solid 2px rgba(0,0,0,0.05);
+
+  &.align-left {
+    justify-content: flex-start;
+
+    ul {
+      li {
+        border-right: solid 2px rgba(0,0,0,0.05);
+      }
+    }
+  }
+
+  &.align-right {
+    justify-content: flex-end;
+
+    ul {
+      li {
+        border-left: solid 2px rgba(0,0,0,0.05);
+      }
+    }
+  }
+
+  a {
+    color: colors.$text !important;
+    text-decoration: none;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+
+    li {
+      position: relative;
+      padding: spacing.$regular spacing.$medium;
+
+      &:hover {
+        background-color: colors.$primary-dark;
+      }
+
+      span {
+        @media (max-width: breakpoints.$tablet) {
+          display: none;
+        }
+      }
+    }
+  }
+}

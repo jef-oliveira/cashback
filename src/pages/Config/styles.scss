@@ -1,0 +1,15 @@
+@use 'styles/colors';
+@use 'styles/spacing';
+
+.config-page {
+  align-items: center;
+
+  .navigation-list {
+    margin: spacing.$medium * -1;
+    margin-bottom: spacing.$medium;
+  }
+
+  p {
+    text-align: center;
+  }
+}

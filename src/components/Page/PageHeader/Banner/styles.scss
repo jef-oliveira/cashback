@@ -1,0 +1,10 @@
+@use 'styles/colors';
+@use 'styles/spacing';
+
+.page-header.banner {
+  .logo {
+    height: 140px;
+    margin: spacing.$large;
+    margin-bottom: spacing.$large*2;
+  }
+}

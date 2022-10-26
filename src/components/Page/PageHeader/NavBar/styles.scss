@@ -1,0 +1,9 @@
+@use 'styles/breakpoints';
+@use 'styles/colors';
+@use 'styles/spacing';
+
+.page-header.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}

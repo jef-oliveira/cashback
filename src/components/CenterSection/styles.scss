@@ -1,0 +1,15 @@
+@use 'styles/breakpoints';
+@use 'styles/spacing';
+
+.center-section {
+  box-sizing: border-box;
+
+  @media (min-width: (breakpoints.$large+(spacing.$large*2)+1px)) {
+    width: breakpoints.$large;
+  }
+
+  @media (max-width: (breakpoints.$large+(spacing.$large*2))) {
+    align-self: stretch;
+    margin: spacing.$large;
+  }
+}
