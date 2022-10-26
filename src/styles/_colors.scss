@@ -1,26 +1,43 @@
 $neutral: #808080;
-$neutral-light: lighten($neutral, 16%);
-$neutral-lightest: lighten($neutral, 32%);
-$neutral-dark: darken($neutral, 16%);
-$neutral-darkest: darken($neutral, 32%);
-
 $neutral-white: #FFFFFF;
 $neutral-black: #000000;
 
 $primary: #FAB31C;
-$primary-light: lighten($primary, 6%);
-$primary-lightest: lighten($primary, 12%);
-$primary-dark: darken($primary, 6%);
-$primary-darkest: darken($primary, 12%);
-
-$danger: #C20114;
-$danger-light: lighten($danger, 5%);
-$danger-lightest: lighten($danger, 10%);
-$danger-dark: darken($danger, 5%);
-$danger-darkest: darken($danger, 10%);
-
 $success: #3F7D20;
-$success-light: lighten($success, 5%);
-$success-lightest: lighten($success, 10%);
-$success-dark: darken($success, 5%);
-$success-darkest: darken($success, 10%);
+$danger: #C20114;
+
+@function buildColorMap($regularColor, $variation) {
+  $colors: (
+    regular: $regularColor,
+    light: lighten($regularColor, $variation),
+    lightest: lighten($regularColor, ($variation*2)),
+    dark: darken($regularColor, $variation),
+    darkest: darken($regularColor, ($variation*2)),
+  );
+
+  @return $colors;
+}
+
+$neutral-colors: buildColorMap($neutral, 16);
+$neutral-light: map-get($neutral-colors, light);
+$neutral-lightest: map-get($neutral-colors, lightest);
+$neutral-dark: map-get($neutral-colors, dark);
+$neutral-darkest: map-get($neutral-colors, darkest);
+
+$primary-colors: buildColorMap($primary, 6);
+$primary-light: map-get($primary-colors, light);
+$primary-lightest: map-get($primary-colors, lightest);
+$primary-dark: map-get($primary-colors, dark);
+$primary-darkest: map-get($primary-colors, darkest);
+
+$danger-colors: buildColorMap($danger, 5);
+$danger-light: map-get($danger-colors, light);
+$danger-lightest: map-get($danger-colors, lightest);
+$danger-dark: map-get($danger-colors, dark);
+$danger-darkest: map-get($danger-colors, darkest);
+
+$success-colors: buildColorMap($success, 5);
+$success-light: map-get($success-colors, light);
+$success-lightest: map-get($success-colors, lightest);
+$success-dark: map-get($success-colors, dark);
+$success-darkest: map-get($success-colors, darkest);

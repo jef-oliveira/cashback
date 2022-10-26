@@ -14,6 +14,10 @@ html {
     -moz-osx-font-smoothing: grayscale;
     color: colors.$neutral-dark;
     font-size: 16px;
+
+    a {
+      color: inherit;
+    }
   }
 
   body, #root {

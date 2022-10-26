@@ -1,0 +1,29 @@
+@use 'styles/colors';
+@use 'styles/spacing';
+
+.button {
+  height: spacing.$huge;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: inherit;
+  padding: spacing.$regular spacing.$medium;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  &.regular {
+    border: 2px solid colors.$primary;
+    color: colors.$primary;
+    background-color: white;
+  }
+
+  &.primary {
+    color: white;
+    background-color: colors.$primary;
+  }
+
+  &.danger {
+    color: white;
+    background-color: colors.$danger;
+  }
+}
