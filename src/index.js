@@ -8,7 +8,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import './index.css';
+import './index.scss';
 
 library.add(fas, far, fab);
 

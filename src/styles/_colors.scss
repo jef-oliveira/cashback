@@ -1,16 +1,26 @@
+$neutral: #808080;
+$neutral-light: lighten($neutral, 16%);
+$neutral-lightest: lighten($neutral, 32%);
+$neutral-dark: darken($neutral, 16%);
+$neutral-darkest: darken($neutral, 32%);
+
+$neutral-white: #FFFFFF;
+$neutral-black: #000000;
+
 $primary: #FAB31C;
-$primary-light: lighten($primary, 5%);
-$primary-dark: darken($primary, 5%);
+$primary-light: lighten($primary, 6%);
+$primary-lightest: lighten($primary, 12%);
+$primary-dark: darken($primary, 6%);
+$primary-darkest: darken($primary, 12%);
 
-$background: #FFFFFF;
-$background-dark: darken($background, 4%);
+$danger: #C20114;
+$danger-light: lighten($danger, 5%);
+$danger-lightest: lighten($danger, 10%);
+$danger-dark: darken($danger, 5%);
+$danger-darkest: darken($danger, 10%);
 
-$text: #585858;
-$text-light: lighten($text, 25%);
-$text-lightest: lighten($text, 50%);
-$text-dark: darken($text, 25%);
-
-//LEGACY
-$light-grey: #FAFAFA;
-$regular-grey: #F7F7F7;
-$grey: #E7E7E7;
+$success: #3F7D20;
+$success-light: lighten($success, 5%);
+$success-lightest: lighten($success, 10%);
+$success-dark: darken($success, 5%);
+$success-darkest: darken($success, 10%);

@@ -4,15 +4,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: colors.$text;
+  color: colors.$neutral-dark;
   font-size: 16px;
-}
-
-.app a {
-  color: colors.$text;
-}
-
-.app .version {
-  color: colors.$text-light;
-  font-size: 0.8em;
 }

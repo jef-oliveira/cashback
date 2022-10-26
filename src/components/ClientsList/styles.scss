@@ -11,12 +11,12 @@
   th, td {
     width: 25%;
     padding: spacing.$regular spacing.$medium;
-    border-bottom: solid 1px colors.$text-lightest;
+    border-bottom: solid 1px colors.$neutral-lightest;
     text-align: left;
 
     .icon {
       font-size: 0.9em;
-      color: colors.$text-light;
+      color: colors.$neutral-light;
       margin-left: spacing.$small;
     }
 
@@ -44,11 +44,11 @@
       cursor: pointer;
 
       &:nth-child(even) {
-        background-color: colors.$background-dark;
+        background-color: lighten(colors.$neutral-lightest, 15%);
       }
 
       &:hover {
-        background-color: darken(colors.$background-dark, 2%);
+        background-color: lighten(colors.$neutral-lightest, 13%);
       }
 
       &.empty {
@@ -65,7 +65,7 @@
 
           .icon {
             font-size: 4em;
-            color: colors.$text-light;
+            color: colors.$neutral-light;
           }
 
           h2 {

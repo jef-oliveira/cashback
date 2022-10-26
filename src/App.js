@@ -2,8 +2,6 @@ import Firebase from 'fb';
 import { AuthProvider, DataProvider } from 'context';
 import Router from 'pages';
 
-import './App.scss';
-
 Firebase.initialize();
 
 function App() {

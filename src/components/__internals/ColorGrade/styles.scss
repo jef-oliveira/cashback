@@ -1,0 +1,120 @@
+@use 'styles/colors';
+
+.color-grade {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .row {
+    display: flex;
+    flex-direction: row;
+
+    div {
+      width: 32px;
+      height: 32px;
+
+      &:nth-child(1), &:nth-child(7) {
+        width: unset;
+        height: unset;
+      }
+    }
+
+    &.neutral {
+      border: solid 1px colors.$neutral;
+
+      div {
+        &:nth-child(1) {
+          background-color: colors.$neutral-white;
+          width: 32px;
+          height: 32px;
+        }
+        &:nth-child(2) {
+          background-color: colors.$neutral-lightest;
+        }
+        &:nth-child(3) {
+          background-color: colors.$neutral-light;
+        }
+        &:nth-child(4) {
+          background-color: colors.$neutral;
+        }
+        &:nth-child(5) {
+          background-color: colors.$neutral-dark;
+        }
+        &:nth-child(6) {
+          background-color: colors.$neutral-darkest;
+        }
+        &:nth-child(7) {
+          background-color: colors.$neutral-black;
+          width: 32px;
+          height: 32px;
+        }
+      }
+    }
+
+    &.primary {
+      border: solid 1px colors.$primary;
+
+      div {
+        &:nth-child(2) {
+          background-color: colors.$primary-lightest;
+        }
+        &:nth-child(3) {
+          background-color: colors.$primary-light;
+        }
+        &:nth-child(4) {
+          background-color: colors.$primary;
+        }
+        &:nth-child(5) {
+          background-color: colors.$primary-dark;
+        }
+        &:nth-child(6) {
+          background-color: colors.$primary-darkest;
+        }
+      }
+    }
+
+    &.danger {
+      border: solid 1px colors.$danger;
+
+      div {
+        &:nth-child(2) {
+          background-color: colors.$danger-lightest;
+        }
+        &:nth-child(3) {
+          background-color: colors.$danger-light;
+        }
+        &:nth-child(4) {
+          background-color: colors.$danger;
+        }
+        &:nth-child(5) {
+          background-color: colors.$danger-dark;
+        }
+        &:nth-child(6) {
+          background-color: colors.$danger-darkest;
+        }
+      }
+    }
+
+    &.success {
+      border: solid 1px colors.$success;
+
+      div {
+        &:nth-child(2) {
+          background-color: colors.$success-lightest;
+        }
+        &:nth-child(3) {
+          background-color: colors.$success-light;
+        }
+        &:nth-child(4) {
+          background-color: colors.$success;
+        }
+        &:nth-child(5) {
+          background-color: colors.$success-dark;
+        }
+        &:nth-child(6) {
+          background-color: colors.$success-darkest;
+        }
+      }
+    }
+  }
+}

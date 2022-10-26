@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 
 import { Icon } from 'components';
 import { useClients } from 'context';
@@ -11,34 +11,36 @@ function ListBody({ search, sorting, onClick }) {
   if (clients.length)
     return (
       clients.map(client => (
-        <tr key={client.id}>
-          {COLUMNS.map((column, index) => (
-            <ListData key={index} { ...column } client={client} onClick={onClick} />
-          ))}
-        </tr>
+        <ListRow key={client.id} client={client} onClick={onClick} />
       ))
     );
   else
     return (
-      <EmptyData />
+      <EmptyRow />
     );
 }
 
-function ListData({ column, client, onClick }) {
+function ListRow({ client, onClick }) {
   const handleClick = useCallback(function() {
     if (onClick)
-      onClick({ column, client });
-  }, [column, client, onClick]);
+      onClick(client);
+  }, [client, onClick]);
 
-  const whatsappLink = useMemo(function() {
-    return `https://wa.me/55${client.phone}?text=Você ainda tem R$ ${toMonetaryString(client.cashbackBalance)} de cashback na loja. Aproveita e dá uma passada aqui!`
-  }, [client]);
+  return (
+    <tr onClick={handleClick}>
+      {COLUMNS.map((column, index) => (
+        <ListData key={index} { ...column } client={client} />
+      ))}
+    </tr>
+  );
+}
 
+function ListData({ column, client }) {
   switch(column) {
     case 'name':
       return (
         <td>
-          <span onClick={handleClick}>
+          <span>
             {client.name}
             {client.registered && <Icon name="address-card" type={Icon.REGULAR} title="Autenticado" />}
             {client.admin && <Icon name="screwdriver-wrench" title="Administrador" />}
@@ -48,26 +50,22 @@ function ListData({ column, client, onClick }) {
     case 'phone':
       return (
         <td>
-          {client.phone?.length > 0 && (
-            <a target="_blank" rel="noreferrer" href={whatsappLink}>
-              {client.phone}
-            </a>
-          )}
+          {client.phone || '-'}
         </td>
       );
     case 'lastTransaction':
       return (
         <td>
-          <span onClick={handleClick}>
-            {client.lastTransaction ? client['lastTransaction'].date.toLocaleString() : '-'}
+          <span>
+            {client.lastTransaction?.date.toLocaleString() || '-'}
           </span>
         </td>
       );
     case 'cashbackBalance':
       return (
         <td>
-          <span onClick={handleClick}>
-            {client.cashbackBalance ? `R$ ${toMonetaryString(client.cashbackBalance)}` : '-'}
+          <span>
+            {toMonetaryString(client.cashbackBalance)}
           </span>
         </td>
       );
@@ -76,7 +74,7 @@ function ListData({ column, client, onClick }) {
   }
 }
 
-function EmptyData() {
+function EmptyRow() {
   return (
     <tr className="empty">
       <td colSpan={COLUMNS.length}>
@@ -89,7 +87,8 @@ function EmptyData() {
 }
 
 function toMonetaryString(number) {
-  return (number).toFixed(2).replace('.', ',');
+  if (number !== null && number !== undefined)
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(number);
 }
 
 export default ListBody;
