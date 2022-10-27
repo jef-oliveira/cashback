@@ -1,16 +1,23 @@
-import { TextInput, Button, ClientsList } from 'components';
+import { useState } from 'react';
+
+import { Input, Button, ClientsList, ClientFormDialog } from 'components';
 
 import './styles.scss';
 
 function Clients() {
+  const [selectedClient, setSelectedClient] = useState();
 
   return (
     <div className="clients-page">
       <div className="search-bar">
-        <TextInput icon="magnifying-glass" placeholder="Buscar por nome..." />
+        <Input type="text" icon="magnifying-glass" placeholder="Buscar por nome..." />
         <Button theme={Button.PRIMARY} style={{ marginLeft: '8px' }}>Procurar</Button>
+        <Button theme={Button.PRIMARY} fill={Button.SOLID} style={{ marginLeft: '8px' }} onClick={() => setSelectedClient({})}>Adicionar cliente</Button>
       </div>
-      <ClientsList onClick={client => console.log('CLIENT', client)} />
+      <ClientsList onClick={setSelectedClient} />
+      {Boolean(selectedClient) && (
+        <ClientFormDialog client={selectedClient} onCancel={() => setSelectedClient()} />
+      )}
     </div>
   );
 }

@@ -56,8 +56,9 @@ class Person extends Firebase.Model {
   }
 
   addTransaction(transaction) {
-    const newTransaction = { ...transaction };
-    this.transactions.push();
+    const trackingData = this.__trackingData('create');
+    const newTransaction = { ...trackingData, date: trackingData.createdAt, ...transaction };
+    this.transactions.push(newTransaction);
     this.__cashbackBalance += newTransaction.value;
     this.__lastTransaction = newTransaction;
   }

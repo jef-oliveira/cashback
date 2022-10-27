@@ -1,0 +1,40 @@
+@use 'styles/colors';
+@use 'styles/spacing';
+
+.dialog {
+  .content-container {
+    width: fit-content;
+    border-radius: 8px;
+    box-sizing: border-box;
+    background-color: colors.$neutral-white;
+
+    .title {
+      display: flex;
+      flex-direction: row;
+      padding: spacing.$medium;
+      border-bottom: solid 1px colors.$neutral-lightest;
+
+      h2 {
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    .content {
+      padding: spacing.$medium;
+    }
+
+    .action {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      padding: spacing.$medium;
+      border-top: solid 1px colors.$neutral-lightest;
+    }
+
+    .button {
+      margin-left: spacing.$regular;
+    }
+  }
+
+}

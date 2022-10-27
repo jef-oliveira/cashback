@@ -1,0 +1,24 @@
+@use 'styles/spacing';
+
+.client-dialog {
+  .content-container {
+    max-width: 470px;
+  }
+
+  p {
+    padding: 0;
+    margin: 0 0 spacing.$medium 0;
+  }
+
+  .input:not(:last-child) {
+    margin-bottom: spacing.$medium;
+  }
+
+  .input.phone {
+    width:  164px;
+  }
+
+  .input.initial-cashback {
+    width:  240px;
+  }
+}
