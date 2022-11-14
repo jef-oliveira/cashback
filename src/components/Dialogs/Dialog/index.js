@@ -26,7 +26,7 @@ function Dialog({ title, cancelLabel='Cancelar', onCancel, confirmLabel='Confirm
           </div>
 
           <footer className="action">
-            {Boolean(onCancel) && <Button theme={Button.PRIMARY} onClick={onCancel}>{cancelLabel}</Button>}
+            {Boolean(onCancel) && <Button type="button" theme={Button.PRIMARY} onClick={onCancel}>{cancelLabel}</Button>}
             {Boolean(onConfirm) && <Button type="submit" theme={Button.PRIMARY} fill={Button.SOLID}>{confirmLabel}</Button>}
           </footer>
         </section>

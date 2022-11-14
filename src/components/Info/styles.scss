@@ -1,0 +1,30 @@
+@use 'styles/colors';
+@use 'styles/spacing';
+
+.info {
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: spacing.$medium;
+  font-size: 0.9em;
+  line-height: 100%;
+
+  .icon {
+    margin-right: spacing.$regular;
+  }
+
+  $types: (
+    neutral: colors.$neutral-colors,
+    success: colors.$success-colors,
+    danger: colors.$danger-colors,
+    warning: colors.$primary-colors,
+  );
+
+  @each $type, $color-map in $types {
+    $dark-color: map-get($color-map, dark);
+    $lightest-color: map-get($color-map, lightest);
+    &.#{$type} {
+      color: $dark-color;
+      background-color: transparentize($lightest-color, 0.5);
+    }
+  }
+}

@@ -1,17 +1,37 @@
+@use 'styles/colors';
 @use 'styles/spacing';
 
 .account-page {
   align-items: center;
 
-  p {
-    text-align: center;
+  .info {
+    margin: spacing.$large
   }
 
-  .profile-data {
-    margin-bottom: spacing.$medium;
+  .cashback-message {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+
+    h3 {
+      margin: 0 spacing.$medium 0 0;
+    }
+
+    .transaction-history-value {
+      .icon {
+        display: none;
+      }
+    }
+
+    a {
+      .icon {
+        color: colors.$neutral-light;
+        margin-right: spacing.$regular;
+      }
+    }
+  }
+
+  .cashback-message, .profile-data {
+    margin-bottom: spacing.$medium;
   }
 }

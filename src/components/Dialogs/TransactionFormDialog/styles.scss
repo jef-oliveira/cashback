@@ -1,0 +1,63 @@
+@use 'styles/colors';
+@use 'styles/spacing';
+
+.transaction-form-dialog {
+  .content-container {
+    max-width: 490px;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+
+    .profile-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+
+      a {
+        margin-left: spacing.$medium;
+        align-self: center;
+      }
+    }
+
+    .profile-container, .info, .balance-container {
+      margin-bottom: spacing.$medium;
+    }
+
+    .balance-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .input {
+        flex: 1;
+      }
+
+      .balance-result {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        align-self: stretch;
+        margin-left: spacing.$medium;
+        line-height: 100%;
+
+        .transaction-history-value {
+          font-weight: bold;
+          font-size: 1.5em;
+        }
+      }
+    }
+
+    a {
+      align-self: flex-end;
+
+      .icon {
+        color: colors.$neutral-light;
+        margin-right: spacing.$regular;
+      }
+    }
+  }
+}

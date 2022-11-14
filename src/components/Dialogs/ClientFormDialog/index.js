@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from 'react';
 
-import { Dialog, Input } from 'components';
+import { Dialog, Info, ProfileData, Input } from 'components';
 import { Client } from 'models';
 
 import './styles.scss';
@@ -12,13 +12,6 @@ function ClientFormDialog({ client, onCancel, ...props }) {
 
   const title = useMemo(function() {
     return `${client.id ? 'Editar' : 'Adicionar'} cliente`;
-  }, [client]);
-
-  const message = useMemo(() => {
-    if (client.id)
-      return `${client.name} está acumulando cashback desde ${client.createdAt.toLocaleDateString()}!`;
-    else
-      return 'Adicione um novo cliente para começar a acumular cashback!';
   }, [client]);
 
   const handleConfirm = useCallback(function() {
@@ -38,7 +31,8 @@ function ClientFormDialog({ client, onCancel, ...props }) {
       onConfirm={handleConfirm}
       className="client-dialog"
     >
-      <p>{message}</p>
+      {!Boolean(client.id) && <Info>Adicione um novo cliente para começar a acumular cashback!</Info>}
+      {Boolean(client.id) && <ProfileData person={client} />}
 
       <Input
         type="text"
@@ -61,7 +55,7 @@ function ClientFormDialog({ client, onCancel, ...props }) {
         className="phone"
       />
 
-      {!client.id && (
+      {!Boolean(client.id) && (
         <Input
           type="number"
           icon="coins"

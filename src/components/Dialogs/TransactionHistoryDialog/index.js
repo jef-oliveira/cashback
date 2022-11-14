@@ -1,34 +1,33 @@
-import Dialog from '../Dialog';
+import { useMemo } from 'react';
 
-import './styles.css';
+import { Dialog, ProfileData, Icon } from 'components';
+import { toMonetaryString } from 'utils';
+
+import './styles.scss';
 
 function TransactionHistoryDialog({ client, onCancel, ...props }) {
-  const countEnding = client.transactions.length === 1 ? 'o' : 'os';
-
   return (
     <Dialog
       { ...props }
-      title={`Movimentações de ${client.name}`}
+      title="Histórico de lançamentos"
       cancelLabel="OK"
       onCancel={onCancel}
-      className="transaction-dialog"
+      className="transaction-history-dialog"
     >
-      <p>{client.name} tem {client.transactions.length} lançament{countEnding} registrad{countEnding}!</p>
+      <ProfileData person={client} />
       <table>
         <tbody>
           {client.transactions.sort((t1, t2) => t1.date - t2.date).map(transaction => (
             <tr key={transaction.date.getTime()}>
-              <td className="date">{transaction.date.toLocaleString()}</td>
-              <td className={transaction.value > 0 ? 'increased' : 'decreased'}>
-                R$ {toMonetaryString(transaction.value)}
-              </td>
+              <td><small>{transaction.date.toLocaleString()}</small></td>
+              <td><Value ammount={transaction.value} /></td>
             </tr>
           ))}
         </tbody>
         <tfoot>
           <tr>
             <td colSpan="2">
-              Cashback: R$ {toMonetaryString(client.cashbackBalance)}
+              <strong>Saldo atual: {toMonetaryString(client.cashbackBalance)}</strong>
             </td>
           </tr>
         </tfoot>
@@ -37,8 +36,22 @@ function TransactionHistoryDialog({ client, onCancel, ...props }) {
   );
 }
 
-function toMonetaryString(number) {
-  return (number).toFixed(2).replace('.', ',');
+function Value({ initial, ammount }) {
+  const { difference, className } = useMemo(() => {
+    const difference = (ammount || 0) - (initial || 0);
+    const className = !difference ? 'unchanged' : difference > 0 ? 'increased' : 'decreased';
+    return { difference, className };
+  }, [initial, ammount]);
+
+  return (
+    <span className={`transaction-history-value ${className}`}>
+      {toMonetaryString(ammount)}
+      {Boolean(difference) && <Icon name={`caret-${difference > 0 ? 'up' : 'down'}`} />}
+      {!Boolean(difference) && <Icon name="equals" />}
+    </span>
+  );
 }
+
+TransactionHistoryDialog.Value = Value;
 
 export default TransactionHistoryDialog;

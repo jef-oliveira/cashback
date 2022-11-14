@@ -9,7 +9,8 @@
           fb: './src/firebase',
           models: './src/models',
           pages: './src/pages',
-          styles: './src/styles'
+          styles: './src/styles',
+          utils: './src/utils'
         }
       }
     ]

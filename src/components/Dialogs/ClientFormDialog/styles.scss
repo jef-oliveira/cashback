@@ -2,23 +2,31 @@
 
 .client-dialog {
   .content-container {
+    min-width: 390px;
     max-width: 470px;
   }
 
-  p {
-    padding: 0;
-    margin: 0 0 spacing.$medium 0;
+  .content {
+    display: flex;
+    flex-direction: column;
+
+    .profile-data {
+      align-self: center;
+    }
+
+    .info, .profile-data, .input:not(:last-child) {
+      margin-bottom: spacing.$medium;
+    }
+
+    .input {
+      &.phone {
+        width:  180px;
+      }
+
+      &.initial-cashback {
+        width:  260px;
+      }
+    }
   }
 
-  .input:not(:last-child) {
-    margin-bottom: spacing.$medium;
-  }
-
-  .input.phone {
-    width:  164px;
-  }
-
-  .input.initial-cashback {
-    width:  240px;
-  }
 }

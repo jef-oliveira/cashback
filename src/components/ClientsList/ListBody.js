@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 
 import { Icon } from 'components';
 import { useClients } from 'context';
+import { toMonetaryString } from 'utils';
 
 import { COLUMNS } from './';
 
@@ -84,11 +85,6 @@ function EmptyRow() {
       </td>
     </tr>
   );
-}
-
-function toMonetaryString(number) {
-  if (number !== null && number !== undefined)
-    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(number);
 }
 
 export default ListBody;

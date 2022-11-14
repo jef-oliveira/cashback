@@ -1,0 +1,54 @@
+@use 'styles/colors';
+@use 'styles/spacing';
+
+.transaction-history-dialog {
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    table {
+      margin-top: spacing.$medium;
+      width: fit-content;
+
+      td {
+        padding-bottom: spacing.$small;
+        padding-left: spacing.$regular;
+        text-align: right;
+      }
+
+      tbody {
+        max-height: 30vh;
+        overflow: auto;
+        display: block;
+
+        td {
+          border-bottom: solid 1px colors.$neutral-lightest;
+        }
+      }
+    }
+  }
+}
+
+.transaction-history-value {
+  white-space: nowrap;
+
+  &.increased {
+    color: colors.$success;
+    .icon {
+      opacity: 1;
+    }
+  }
+
+  &.decreased {
+    color: colors.$danger;
+    .icon {
+      opacity: 1;
+    }
+  }
+
+  .icon {
+    margin-left: 0.2em;
+    opacity: 0;
+  }
+}
