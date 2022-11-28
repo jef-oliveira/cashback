@@ -1,0 +1,53 @@
+@use 'styles/spacing';
+@use 'styles/colors';
+
+.product-dialog {
+  .content-container {
+    min-width: 390px;
+    max-width: 470px;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+
+    .info, .isbn, .authors, .input:not(:last-child) {
+      margin-bottom: spacing.$medium;
+    }
+
+    .isbn, .authors {
+      .input {
+        margin-bottom: 0;
+      }
+    }
+
+    .isbn {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+    }
+
+    .tags {
+      .list {
+        span {
+          display: inline-flex;
+          align-items: center;
+          background-color: colors.$neutral-lightest;
+          padding: spacing.$small spacing.$medium;
+          margin: spacing.$small;
+          border-radius: 99px;
+
+          .icon {
+            margin-left: spacing.$small;
+            cursor: pointer;
+          }
+
+          &:not(:last-child) {
+            margin-right: spacing.$small;
+          }
+        }
+      }
+    }
+  }
+
+}

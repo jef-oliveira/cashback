@@ -30,10 +30,6 @@
     }
   }
 
-  a {
-    text-decoration: none;
-  }
-
   ul {
     list-style-type: none;
     margin: 0;
@@ -43,19 +39,24 @@
     align-items: center;
     cursor: pointer;
 
-    li {
-      position: relative;
-      padding: spacing.$regular spacing.$medium;
+    a.navigation-item {
+      text-decoration: none;
 
-      &:hover {
-        background-color: colors.$primary-dark;
-      }
+      li {
+        position: relative;
+        padding: spacing.$regular spacing.$medium;
 
-      span {
-        @media (max-width: breakpoints.$tablet) {
-          display: none;
+        &:hover {
+          background-color: colors.$primary-dark;
+        }
+
+        span {
+          @media (max-width: breakpoints.$tablet) {
+            display: none;
+          }
         }
       }
     }
+
   }
 }

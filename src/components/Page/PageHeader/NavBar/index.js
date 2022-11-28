@@ -10,15 +10,15 @@ function NavBar({ className, ...props }) {
   return (
     <Header className={`navbar${className ? ` ${className}` : ''}`} { ...props }>
       <NavigationList>
+        {Boolean(currentUser?.admin) && (
+          <NavigationList.Item icon="screwdriver-wrench" title="Configurações" to="/config" />
+        )}
         <NavigationList.Item icon="home" title="Início" to="/" />
         <NavigationList.Item icon="shopping-cart" title="Carrinho" to="/cart" />
         {Boolean(currentUser) && (
           <>
             <NavigationList.Item icon="heart" title="Lista de desejos" to="/wishlist" />
             <NavigationList.Item icon="user-circle" title="Minha conta" to="/account" />
-            {Boolean(currentUser?.admin) && (
-              <NavigationList.Item icon="screwdriver-wrench" title="Configurações" to="/config" />
-            )}
             <NavigationList.Item icon="right-from-bracket" onClick={signOut} title="Sair" />
           </>
         )}

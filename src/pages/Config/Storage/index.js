@@ -1,14 +1,29 @@
-import { Info } from 'components';
+import { useState, useCallback } from 'react';
 
-function Storage() {
+import { Input, Button, ProductsList, ProductFormDialog } from 'components';
+
+import './styles.scss';
+
+function Clients() {
+  const [selectedProduct, setSelectedProduct] = useState();
+  const [search, setSearch] = useState('');
+
+  const handleSearch = useCallback(function(event) {
+    setSearch(event?.target?.value || '');
+  }, []);
+
   return (
-    <>
-      <h2>Controle de estoque</h2>
-      <Info>
-        É ideia é poder adicionar, editar e excluir itens do estoque da loja. Itens terão dados como nome, imagem, preço, quantidade em estoque, se são pronta entrega ou encomenda/pré-venda.
-      </Info>
-    </>
+    <div className="storage-page">
+      <div className="search-bar">
+        <Input type="text" icon="magnifying-glass" placeholder="Buscar por título..." value={search} onChange={handleSearch} />
+        <Button theme={Button.PRIMARY} fill={Button.SOLID} onClick={() => setSelectedProduct({})}>Adicionar produto</Button>
+      </div>
+      <ProductsList search={search} onClick={setSelectedProduct} />
+      {Boolean(selectedProduct) && (
+        <ProductFormDialog product={selectedProduct} onCancel={() => setSelectedProduct()} />
+      )}
+    </div>
   );
 }
 
-export default Storage;
+export default Clients;

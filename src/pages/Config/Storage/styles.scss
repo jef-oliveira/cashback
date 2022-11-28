@@ -1,9 +1,27 @@
 @use 'styles/spacing';
 
-.account-page {
-  align-items: center;
+.storage-page {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  align-self: stretch;
 
-  .info {
-    margin: spacing.$large;
+  .search-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: spacing.$huge;
+
+    .text-input {
+      flex: 0.5;
+    }
+
+    .button {
+      margin-left: spacing.$regular;
+    }
+  }
+
+  p {
+    text-align: center;
   }
 }

@@ -3,16 +3,22 @@
 
 .dialog {
   .content-container {
+    position: relative;
+    max-height: calc(100vh - (spacing.$large*2));
     width: fit-content;
     border-radius: 8px;
     box-sizing: border-box;
     background-color: colors.$neutral-white;
+    overflow: auto;
 
     .title {
       display: flex;
       flex-direction: row;
       padding: spacing.$medium;
       border-bottom: solid 1px colors.$neutral-lightest;
+      background-color: inherit;
+      position: sticky;
+      top: 0;
 
       h2 {
         margin: 0;
@@ -30,6 +36,9 @@
       justify-content: flex-end;
       padding: spacing.$medium;
       border-top: solid 1px colors.$neutral-lightest;
+      background-color: inherit;
+      position: sticky;
+      bottom: 0;
     }
 
     .button {
